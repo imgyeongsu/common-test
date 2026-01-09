@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    container_name: react-frontend
+
+    # 백엔드와 연결시 네트워크 설정
+    # networks:
+    #   - app-network
+
+# 백엔드와 함께 사용시
+# networks:
+#   app-network:
+#     driver: bridge
