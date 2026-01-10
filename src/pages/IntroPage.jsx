@@ -95,6 +95,13 @@ function IntroPage() {
             <span className="link-icon">🧠</span>
             <span>3D 마인드맵 보기</span>
           </button>
+          <button
+            className="quick-link-button"
+            onClick={() => navigate('/chat')}
+          >
+            <span className="link-icon">💬</span>
+            <span>채팅방 입장하기</span>
+          </button>
           <a
             className="quick-link-button"
             href="/WEBRTC_GUIDE.md"

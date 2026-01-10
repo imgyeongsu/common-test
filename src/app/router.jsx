@@ -13,6 +13,7 @@ const IntroPage = lazy(() => import('@/pages/IntroPage'));
 const MediaCapturePage = lazy(() => import('@/pages/MediaCapturePage'));
 const PeerConnectionPage = lazy(() => import('@/pages/PeerConnectionPage'));
 const MindMapPage = lazy(() => import('@/pages/MindMapPage'));
+const ChatPage = lazy(() => import('@/pages/ChatPage'));
 
 // Loading Fallback 컴포넌트
 const PageLoader = () => (
@@ -63,6 +64,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <MindMapPage />
+          </Suspense>
+        )
+      },
+      {
+        path: 'chat',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <ChatPage />
           </Suspense>
         )
       },
