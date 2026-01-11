@@ -16,8 +16,8 @@ import {
 } from '@/features/mindmap-3d';
 
 function MindMapPage() {
-  // WebSocket 연결 (향후 환경변수로 관리)
-  const WS_URL = 'ws://localhost:8080';
+  // WebSocket 연결 (환경변수로 관리)
+  const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:8080';
 
   // Hooks 조합
   const { isConnected, onKeywords, onRelationships } = useMindMapWebSocket(WS_URL);

@@ -1,14 +1,70 @@
+# Dependencies (Docker에서 재설치할 것이므로 제외)
 node_modules
-dist
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Git 관련 (이미지에 불필요)
 .git
 .github
-.gemini
 .gitignore
-README.md
-*.log
-npm-debug.log*
+.gitattributes
+
+# 빌드 산출물 (Docker에서 새로 빌드)
+dist
+dist-ssr
+build
+*.local
+
+# 개발 환경 설정 (이미지에 불필요)
+.vscode
+.idea
 .DS_Store
+Thumbs.db
+*.sw?
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# 환경변수 파일 (Docker build arg로 주입)
 .env.local
+.env.development
 .env.development.local
 .env.test.local
 .env.production.local
+
+# 로그 파일
+logs
+*.log
+
+# 테스트 관련
+coverage
+.nyc_output
+jest.config.js
+**/*.test.js
+**/*.spec.js
+
+# 문서 파일 (이미지에 불필요)
+README.md
+ARCHITECTURE.md
+DOCKER_DEPLOYMENT.md
+docs
+*.md
+
+# 임시 파일
+*.tmp
+*.temp
+.cache
+
+# Docker 관련
+docker-compose.yml
+docker-compose.*.yml
+Dockerfile
+.dockerignore
+
+# 기타 개발 도구
+.gemini
+.eslintrc*
+.prettierrc*
+tsconfig.json

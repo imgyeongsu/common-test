@@ -7,7 +7,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = 'http://localhost:8080';
+const SOCKET_URL = import.meta.env.VITE_SIGNALING_URL || 'http://localhost:8080';
 
 export function useWebRTCChat(roomId = 'default') {
   const [isConnected, setIsConnected] = useState(false);

@@ -7,8 +7,16 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-# 소스 코드 복사 및 빌드
+# 소스 코드 복사
 COPY . .
+
+# 빌드 시 환경변수 주입
+ARG VITE_SIGNALING_URL
+ARG VITE_WS_URL
+ENV VITE_SIGNALING_URL=$VITE_SIGNALING_URL
+ENV VITE_WS_URL=$VITE_WS_URL
+
+# 빌드 실행
 RUN npm run build
 
 # Production stage
