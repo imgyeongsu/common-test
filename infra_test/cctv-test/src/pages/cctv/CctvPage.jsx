@@ -10,8 +10,46 @@ function CctvPage() {
   const videoRef = useRef(null)
   const OV = useRef(null)
 
-  // 하드코딩된 토큰 (테스트용 - 실제로는 백엔드에서 발급받아야 함)
+  // 토큰 발급 관련 상태
+  const [backendUrl, setBackendUrl] = useState('http://localhost:8080')
+  const [sessionId, setSessionId] = useState('store_105')
   const [token, setToken] = useState('')
+  const [isLoadingToken, setIsLoadingToken] = useState(false)
+
+  // 백엔드에서 토큰 발급받기
+  const fetchToken = async () => {
+    if (!backendUrl || !sessionId) {
+      setError('백엔드 URL과 세션 ID를 입력해주세요.')
+      return
+    }
+
+    try {
+      setIsLoadingToken(true)
+      setError(null)
+
+      const response = await fetch(`${backendUrl}/sessions/${sessionId}/connections`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+
+      const data = await response.json()
+      // 응답 형식에 따라 토큰 추출 (일반적인 형식들 지원)
+      const newToken = data.token || data.connectionToken || data
+      setToken(typeof newToken === 'string' ? newToken : JSON.stringify(newToken))
+      console.log('토큰 발급 성공')
+    } catch (err) {
+      console.error('토큰 발급 오류:', err)
+      setError(`토큰 발급 실패: ${err.message}`)
+    } finally {
+      setIsLoadingToken(false)
+    }
+  }
 
   const initSession = async () => {
     try {
@@ -114,10 +152,27 @@ function CctvPage() {
       </div>
 
       <div className="controls">
-        <div className="token-input">
+        <div className="token-section">
+          <div className="token-inputs">
+            <input
+              type="text"
+              placeholder="백엔드 URL (예: http://localhost:8080)"
+              value={backendUrl}
+              onChange={(e) => setBackendUrl(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="세션 ID (예: store_105)"
+              value={sessionId}
+              onChange={(e) => setSessionId(e.target.value)}
+            />
+            <button onClick={fetchToken} disabled={isLoadingToken || connected}>
+              {isLoadingToken ? '발급 중...' : '토큰 발급'}
+            </button>
+          </div>
           <input
             type="text"
-            placeholder="OpenVidu 토큰 입력"
+            placeholder="OpenVidu 토큰 (자동 입력 또는 직접 입력)"
             value={token}
             onChange={(e) => setToken(e.target.value)}
           />

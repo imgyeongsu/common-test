@@ -1,0 +1,36 @@
+# Dependencies (Docker에서 재설치)
+node_modules
+package-lock.json
+npm-debug.log*
+yarn-error.log*
+
+# Git 관련
+.git
+.gitignore
+.gitattributes
+
+# 환경변수
+.env
+.env.*
+
+# 로그
+*.log
+logs
+
+# 개발 도구
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# 문서
+README.md
+*.md
+
+# Docker 관련
+Dockerfile
+.dockerignore
+
+# 임시 파일
+*.tmp
+*.temp

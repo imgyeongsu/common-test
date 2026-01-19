@@ -40,7 +40,46 @@
   margin-bottom: 20px;
 }
 
-.token-input input {
+.token-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.token-inputs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.token-inputs input {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: white;
+  font-size: 14px;
+}
+
+.token-inputs button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  background: #ff9800;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.token-inputs button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.token-section > input {
   width: 100%;
   padding: 12px;
   border: 1px solid #444;
